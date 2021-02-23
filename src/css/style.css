@@ -1,0 +1,269 @@
+@import url("https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500;700&display=swap");
+
+:root {
+  /* Colors */
+  /* Primary */
+  --color-moderate-cyan: hsl(176, 50%, 47%);
+  --color-dark-cyan: hsl(176, 72%, 28%);
+  /* Neutral */
+  --color-black: hsl(0, 0%, 0%);
+  --color-dark-gray: hsl(0, 0%, 48%);
+  /* Typography */
+  --font-size: 16px;
+  --font-main-font: "Commissioner", sans-serif;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-main-font);
+  font-size: var(--font-size);
+  background-color: #f2f2f2;
+}
+
+/* Header */
+
+header .overlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+header {
+  position: relative;
+  background-image: url("../img/image-hero-desktop.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px;
+  width: 100%;
+}
+
+header nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 50px;
+}
+
+header nav ul {
+  display: flex;
+  list-style: none;
+}
+
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+  margin-left: 40px;
+  font-weight: 500;
+}
+
+.hero {
+  position: absolute;
+  bottom: -200px;
+  left: calc(50% - 400px);
+  width: 800px;
+  background-color: white;
+  height: 300px;
+  text-align: center;
+  border-radius: 8px;
+  border: 5px solid --var(--color-dark-gray);
+}
+
+.hero .logo-hero {
+  position: absolute;
+  top: -30px;
+  left: calc(50% - 30px);
+}
+
+.hero .hero-body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 60px;
+}
+
+.hero .hero-body p {
+  color: var(--color-dark-gray);
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+.hero .hero-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 60px;
+}
+
+.hero .hero-button {
+  display: inline-block;
+  background-color: var(--color-moderate-cyan);
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 20px;
+  width: 220px;
+  border-radius: 100px;
+}
+
+.hero .hero-bookmark {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f2f2f2;
+  color: var(--color-dark-gray);
+  font-weight: 700;
+  text-decoration: none;
+  padding-right: 40px;
+  width: 200px;
+  border-radius: 100px;
+}
+
+.hero .hero-bookmark span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  width: 60px;
+  height: 60px;
+}
+.hero .hero-bookmark span svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2f2f2f;
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+}
+
+/* Main */
+
+main {
+  width: 800px;
+  margin: 230px auto;
+}
+
+main .stats {
+  background-color: white;
+  margin: 30px 0;
+  border-radius: 8px;
+  padding: 60px;
+}
+
+main .stats-info {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+}
+
+main .stats-info div {
+  width: 30%;
+  height: 100%;
+  margin-bottom: 30px;
+  padding-left: 50px;
+}
+
+main .stats-info div:nth-child(1) {
+  padding-left: 0;
+}
+
+main .stats-info div:nth-child(even) {
+  border-right: 2px solid #f2f2f2;
+  border-left: 2px solid #f2f2f2;
+  width: 35%;
+}
+
+main .stats-info div h3 {
+  font-size: 35px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+main .stats-info div p {
+  color: var(--color-dark-gray);
+  font-weight: 500;
+}
+
+main .about-this {
+  background-color: white;
+  border-radius: 8px;
+  padding: 60px;
+}
+
+main .about-this h3 {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+main .about-this p {
+  color: var(--color-dark-gray);
+  line-height: 30px;
+  margin: 40px 0;
+  font-size: var(--font-size);
+  text-align: justify;
+}
+
+main .about-this .option {
+  border-radius: 8px;
+  border: 2px solid #f2f2f2;
+  padding: 40px 35px;
+  margin-bottom: 30px;
+}
+
+main .about-this .option:nth-last-child(1) {
+  margin-bottom: 0;
+}
+
+main .about-this .option .option-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+}
+
+main .about-this .option .option-header > p {
+  color: var(--color-moderate-cyan);
+  font-weight: 500;
+}
+
+main .about-this .option .option-body > .buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+main .about-this .option .option-body > .buttons p {
+  display: flex;
+  align-items: center;
+  color: black;
+  font-size: 35px;
+  font-weight: 700;
+}
+
+main .about-this .option .option-body > .buttons p span {
+  color: var(--color-dark-gray);
+  font-size: 15px;
+  font-weight: 400;
+  margin-left: 8px;
+}
+
+main .about-this .option .option-body > .buttons a {
+  display: inline-block;
+  text-align: center;
+  background-color: var(--color-moderate-cyan);
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 20px;
+  width: 180px;
+  border-radius: 100px;
+}
+
+/* Disabled */
