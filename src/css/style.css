@@ -65,7 +65,9 @@ header nav ul li a {
 .hero {
   position: absolute;
   bottom: -200px;
-  left: calc(50% - 400px);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   width: 800px;
   background-color: white;
   height: 300px;
@@ -315,8 +317,10 @@ main .about-this .option .option-body > .buttons button {
   position: absolute;
   background-color: white;
   width: 800px;
-  top: 30vh;
-  left: calc(50% - 400px);
+  top: 20vh;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   border-radius: 8px;
   padding: 60px;
 }
@@ -459,8 +463,10 @@ main .about-this .option .option-body > .buttons button {
   background-color: white;
   text-align: center;
   width: 600px;
-  top: 30vh;
-  left: calc(50% - 300px);
+  top: 20vh;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   border-radius: 8px;
   padding: 60px;
   height: 450px;
