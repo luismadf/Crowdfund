@@ -55,6 +55,16 @@ header nav ul {
   list-style: none;
 }
 
+.mobile-menu {
+  display: none;
+  background-image: url("../img/icon-hamburger.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 15px;
+  width: 15px;
+}
+
 header nav ul li a {
   color: white;
   text-decoration: none;
