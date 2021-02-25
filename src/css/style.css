@@ -120,29 +120,25 @@ header nav ul li a {
   align-items: center;
   background-color: #f2f2f2;
   color: var(--color-dark-gray);
+  font-family: var(--font-main-font);
+  font-size: var(--font-size);
   font-weight: 700;
   text-decoration: none;
-  padding-right: 40px;
-  width: 200px;
+  padding-right: 30px;
+  height: 56px;
+  width: 185px;
   border-radius: 100px;
+  border: none;
+  position: relative;
+  cursor: pointer;
 }
 
-.hero .hero-bookmark span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  width: 60px;
-  height: 60px;
+.hero .hero-bookmark:hover {
+  background-color: #f2f2f2 !important;
 }
-.hero .hero-bookmark span svg {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #2f2f2f;
-  border-radius: 100%;
-  width: 60px;
-  height: 60px;
+
+.hero .hero-bookmark:hover svg g circle {
+  fill: var(--color-dark-gray);
 }
 
 /* Main */
@@ -191,6 +187,26 @@ main .stats-info div h3 {
 main .stats-info div p {
   color: var(--color-dark-gray);
   font-weight: 500;
+}
+
+main .stats .stats-bar {
+  position: relative;
+  margin-top: 10px;
+  width: 100%;
+  background-color: #f2f2f2;
+  height: 15px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+main .stats .stats-bar .bar {
+  position: absolute;
+  border-radius: 10px;
+  top: -2px;
+  left: 0;
+  height: 20px;
+  background-color: var(--color-moderate-cyan);
+  width: 89.91%;
 }
 
 main .about-this {
@@ -259,16 +275,17 @@ main .about-this .option .option-body > .buttons p,
   font-weight: 400;
 }
 
-main .about-this .option .option-body > .buttons a {
-  display: inline-block;
-  text-align: center;
+main .about-this .option .option-body > .buttons button {
   background-color: var(--color-moderate-cyan);
   color: white;
   font-weight: 600;
-  text-decoration: none;
   padding: 20px;
-  width: 180px;
+  width: 220px;
   border-radius: 100px;
+  font-family: var(--font-main-font);
+  font-size: var(--font-size);
+  border: none;
+  cursor: pointer;
 }
 
 /* Modal */
@@ -280,6 +297,16 @@ main .about-this .option .option-body > .buttons a {
   top: 0;
   right: 0;
   bottom: 0;
+}
+
+.overlay-modal {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(3px);
   /*   filter: blur(8px);
   -webkit-filter: blur(8px); */
 }
@@ -319,6 +346,15 @@ main .about-this .option .option-body > .buttons a {
   margin-bottom: 30px;
 }
 
+.modal .option .option-top .option-text h4:hover {
+  color: var(--color-moderate-cyan);
+  cursor: pointer;
+}
+
+.modal .option .option-top input:checked .option {
+  border: 2px solid var(--color-dark-cyan);
+}
+
 .modal .option .option-top {
   padding: 30px 30px;
   display: flex;
@@ -337,12 +373,13 @@ main .about-this .option .option-body > .buttons a {
 }
 
 .modal .option hr {
+  display: none;
   width: 100%;
   border: 1px solid #f2f2f2;
 }
 
 .modal .option .option-bottom {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: space-between;
   padding: 25px 30px;
@@ -433,6 +470,11 @@ main .about-this .option .option-body > .buttons a {
   margin-bottom: 20px;
 }
 
+.modal-success .success-text P {
+  line-height: 25px;
+  font-size: 14px;
+}
+
 .modal-success button {
   background-color: var(--color-moderate-cyan);
   color: white;
@@ -457,4 +499,35 @@ main .about-this .option .option-body > .buttons a {
 
 .hide {
   display: none !important;
+}
+
+button {
+  outline: none !important;
+}
+
+button:hover {
+  outline: none !important;
+  background-color: var(--color-dark-cyan) !important;
+}
+
+.modal .option .option-bottom .inputs input:focus {
+  outline: none !important;
+  border: 2px solid var(--color-moderate-cyan) !important;
+}
+
+.disabled {
+  filter: grayscale(100%);
+  opacity: 0.6;
+}
+
+.modal-active {
+  border: 2px solid var(--color-moderate-cyan) !important;
+}
+
+.modal-active > .option-bottom {
+  display: flex !important;
+}
+
+.modal-active > hr {
+  display: block !important;
 }
