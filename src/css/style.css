@@ -531,3 +531,7 @@ button:hover {
 .modal-active > hr {
   display: block !important;
 }
+
+.hero-bookmark-mobile {
+  display: none;
+}

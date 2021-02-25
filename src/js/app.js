@@ -7,6 +7,7 @@ const optionTwo = document.querySelector("#option-two");
 const optionThree = document.querySelector("#option-three");
 const form = document.querySelector(".modal-options");
 const bookmark = document.querySelector("#hero-bookmark");
+const bookmarkMobile = document.querySelector("#hero-bookmark-mobile");
 const bookmarkText = document.querySelector("#bookmark-text");
 const bookmark1 = bookmark.childNodes[1].childNodes[0].childNodes[0];
 const bookmark2 = bookmark.childNodes[1].childNodes[0].childNodes[1];
@@ -14,7 +15,7 @@ const bookmark2 = bookmark.childNodes[1].childNodes[0].childNodes[1];
 modal.addEventListener("click", (e) => {
   const card = document.querySelectorAll(".modal-options .option");
   const id = e.target.id;
-  if (id) {
+  if (id === "one" || id === "two" || id === "three") {
     card.forEach((option) => {
       option.classList.remove("modal-active");
       console.log(
@@ -25,19 +26,22 @@ modal.addEventListener("click", (e) => {
 });
 
 document.addEventListener("click", (e) => {
+  console.log(e.target);
   switch (e.target.id) {
-    case "hero-bookmark":
-      if (bookmarkText.innerText === "Bookmarked") {
+    case "hero-bookmark || hero-bookmark-mobile":
+      if (bookmarkText.innerText === "Bookmarked" || bookmarkMobile) {
         console.log("Funciona");
         bookmark.style.width = "185px";
         bookmark1.setAttribute("fill", "#2F2F2F");
         bookmark2.setAttribute("fill", "#B1B1B1");
+        bookmarkMobile.setAttribute("fill", "#2F2F2F");
+        bookmarkMobile.setAttribute("fill", "#B1B1B1");
         bookmarkText.innerText = "Bookmark";
         bookmarkText.style.color = "#7A7A7A";
       } else {
         bookmark.style.width = "200px";
-        bookmark1.setAttribute("fill", "#147B74");
-        bookmark2.setAttribute("fill", "#fff");
+        bookmarkMobile.setAttribute("fill", "#147B74");
+        bookmarkMobile.setAttribute("fill", "#fff");
         bookmarkText.innerText = "Bookmarked";
         bookmarkText.style.color = "#147B74";
       }

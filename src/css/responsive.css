@@ -73,3 +73,68 @@ main .about-this .option .option-body > .buttons {
   align-items: initial;
   height: auto;
 }
+
+.modal {
+  width: 90%;
+  left: calc(50% - 169px);
+  padding: 40px 25px;
+}
+
+.modal .close-modal {
+  top: 5px;
+  right: -5px;
+}
+
+.modal .option .option-top {
+  padding: 30px 25px;
+}
+
+.modal .option .option-top .option-title .titles {
+  flex-direction: column;
+}
+
+.modal .option .option-top .option-title .titles p {
+  margin: 0;
+}
+
+.modal .option .option-bottom {
+  flex-direction: column;
+  padding: 25px 20px;
+}
+
+.modal .option .option-bottom .inputs {
+  display: flex;
+  margin-top: 20px;
+}
+
+.modal .option .option-bottom .inputs .number {
+  width: 40%;
+}
+
+.modal .option .option-bottom .inputs button {
+  width: 55%;
+}
+.modal-success {
+  width: 90%;
+  left: calc(50% - 169px);
+  padding: 40px 25px;
+  height: auto;
+}
+
+.modal-success .success-text {
+  margin: 20px 0;
+}
+
+.hero-bookmark {
+  display: none !important;
+}
+
+.hero-bookmark-mobile {
+  display: block;
+  background-color: white;
+  border: none;
+}
+
+.hero-bookmark-mobile:hover {
+  background-color: white !important;
+}
