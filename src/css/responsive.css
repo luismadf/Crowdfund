@@ -26,6 +26,9 @@ header nav ul {
 .hero .hero-buttons {
   padding: 0 25px 40px 25px;
 }
+.hero .hero-button {
+  width: 70%;
+}
 
 main {
   width: 90%;
@@ -156,4 +159,26 @@ main .about-this .option .option-body > .buttons {
 
 .hero-bookmark-mobile:hover {
   background-color: white !important;
+}
+
+.menu-responsive {
+  position: absolute;
+  width: 90%;
+  border-radius: 8px;
+  top: 90px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: white;
+}
+
+.menu-responsive ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-responsive ul li {
+  padding: 20px;
+  font-weight: 500;
 }

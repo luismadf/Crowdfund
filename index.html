@@ -25,8 +25,7 @@
             <li><a href="#">Discover</a></li>
             <li><a href="#">Get Started</a></li>
           </ul>
-          <div class="mobile-menu">
-            <div class="menu-img"></div>
+          <div class="mobile-menu" id="menu-mobile">
           </div>
         </nav>
       </div>
@@ -73,11 +72,11 @@
       <div class="stats">
         <div class="stats-info">
           <div class="">
-            <h3>$89,914</h3>
+            <h3>$<span id="backed"></span></h3>
             <p>of $100,000 backed</p>
           </div>
           <div class="">
-            <h3>5,007</h3>
+            <h3 id="backers"></h3>
             <p>total backers</p>
           </div>
           <div class="">
@@ -86,7 +85,7 @@
           </div>
         </div>
         <div class="stats-bar">
-          <div class="bar"></div>
+          <div class="bar" id="bar"></div>
         </div>
       </div>
 
@@ -298,6 +297,14 @@
         </p>
       </div>
       <button id="finish">Got it!</button>
+    </div>
+
+    <div class="menu-responsive hide">
+      <ul>
+        <li>About</li>
+        <li>Discover</li>
+        <li>Get Started</li>
+      </ul>
     </div>
     <script src="./src/js/app.js"></script>
   </body>
