@@ -61,9 +61,8 @@ header nav ul {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 15px;
-  width: 15px;
-  cursor: pointer;
+  height: 18px;
+  width: 18px;
 }
 
 header nav ul li a {
