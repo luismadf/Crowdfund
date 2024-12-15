@@ -20,6 +20,9 @@ export default {
         "hero-mobile": "url('/src/assets/image-hero-mobile.jpg')",
         "hero-desktop": "url('/src/assets/image-hero-desktop.jpg')",
       },
+      screens: {
+        xs: "350px",
+      },
     },
   },
   plugins: [],
