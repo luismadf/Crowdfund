@@ -21,7 +21,7 @@ export default function Option(props: { option: option }) {
         <h4 className="text-sm font-bold md:text-lg">{title}</h4>
         <p className="text-moderate-cyan text-sm md:text-base">{caption}</p>
       </div>
-      <p className="text-dark-gray mb-9 text-sm leading-6 md:mb-8 md:text-base">
+      <p className="text-dark-gray mb-9 text-sm leading-6 md:mb-8 md:text-base md:leading-7">
         {description}
       </p>
 

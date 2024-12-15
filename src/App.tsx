@@ -4,6 +4,7 @@ import {
   Button,
   Card,
   Divider,
+  MobileMenu,
   Option,
   ProgressBar,
   StatsDisplay,
@@ -23,7 +24,7 @@ const options = [
     title: "Black Edition Stand",
     caption: "Pledge $75 or more",
     description:
-      " You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer member list. Shipping is included.",
+      "You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer member list. Shipping is included.",
     amountLeft: 64,
   },
   {
@@ -62,13 +63,7 @@ function App() {
               ))}
             </div>
 
-            <div className="md:hidden">
-              <svg width="16" height="15" xmlns="http://www.w3.org/2000/svg">
-                <g fill="#FFF" fillRule="evenodd">
-                  <path d="M0 0h16v3H0zM0 6h16v3H0zM0 12h16v3H0z" />
-                </g>
-              </svg>
-            </div>
+            <MobileMenu />
           </nav>
         </div>
       </header>
