@@ -1,51 +1,23 @@
 import { useState } from "react";
 import {
   BookmarkButton,
-  Button,
   Card,
   Divider,
   MobileMenu,
   Option,
   ProgressBar,
+  ProjectModal,
   StatsDisplay,
 } from "./components";
-
-const options = [
-  {
-    id: "1",
-    title: "Bamboo Stand",
-    caption: "Pledge $25 or more",
-    description:
-      "You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and you’ll be added to a special Backer member list.",
-    amountLeft: 101,
-  },
-  {
-    id: "2",
-    title: "Black Edition Stand",
-    caption: "Pledge $75 or more",
-    description:
-      "You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer member list. Shipping is included.",
-    amountLeft: 64,
-  },
-  {
-    id: "3",
-    title: "Mahogany Special Edition",
-    caption: "Pledge $200 or more",
-    description:
-      "You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added to our Backer member list. Shipping is included.",
-    amountLeft: 0,
-  },
-];
-
-const menu = ["About", "Discover", "Get Started"];
+import { menu, options } from "./constants";
 
 function App() {
   const [pressed, setPressed] = useState(false);
 
   return (
     <>
-      <header className="bg-hero-mobile sm:bg-hero-desktop h-[300px] w-full bg-cover bg-top">
-        <div className="bg-gradient-to-b from-black/70 to-transparent pt-8">
+      <header className="h-[300px] w-full bg-hero-mobile bg-cover bg-top sm:bg-hero-desktop">
+        <div className="to-transparent bg-gradient-to-b from-black/70 pt-8">
           <nav className="inset-0 mx-6 flex items-center justify-between xl:mx-auto xl:max-w-6xl">
             <svg width="128" height="20" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -90,12 +62,12 @@ function App() {
           <h1 className="mx-auto mb-6 max-w-48 pt-8 text-center text-xl font-bold md:max-w-full md:pt-9 md:text-3xl">
             Mastercraft Bamboo Monitor Riser
           </h1>
-          <p className="text-dark-gray mb-7 text-center text-sm md:mb-9 md:text-base">
+          <p className="mb-7 text-center text-sm text-dark-gray md:mb-9 md:text-base">
             A beautiful & handcrafted monitor stand to reduce neck and eye
             strain.
           </p>
           <div className="flex justify-between">
-            <Button>Back this project</Button>
+            <ProjectModal buttonText="Back this project" options={options} />
             <BookmarkButton
               pressed={pressed}
               onClick={() => setPressed(!pressed)}
@@ -118,23 +90,24 @@ function App() {
           <h3 className="mb-7 text-lg font-bold md:mb-10 md:text-xl">
             About this project
           </h3>
-          <p className="text-dark-gray mb-8 text-sm leading-6 md:mb-10 md:text-base md:leading-7">
+          <p className="mb-8 text-sm leading-6 text-dark-gray md:mb-10 md:text-base md:leading-7">
             The Mastercraft Bamboo Monitor Riser is a sturdy and stylish
             platform that elevates your screen to a more comfortable viewing
             height. Placing your monitor at eye level has the potential to
             improve your posture and make you more comfortable while at work,
             helping you stay focused on the task at hand.
           </p>
-          <p className="text-dark-gray mb-9 text-sm leading-6 md:mb-11 md:text-base md:leading-7">
+          <p className="mb-9 text-sm leading-6 text-dark-gray md:mb-11 md:text-base md:leading-7">
             Featuring artisan craftsmanship, the simplicity of design creates
             extra desk space below your computer to allow notepads, pens, and
             USB sticks to be stored under the stand.
           </p>
 
           <div className="flex flex-col gap-6">
-            {options.map((option) => (
-              <Option key={option.id} option={option} />
-            ))}
+            {options.map((option) => {
+              if (option.id === "0") return;
+              return <Option key={option.id} option={option} />;
+            })}
           </div>
         </Card>
       </main>
