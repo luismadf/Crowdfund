@@ -1,17 +1,20 @@
 import { twJoin } from "tailwind-merge";
 import Button from "./Button";
 import Card from "./Card";
+import ProjectModal from "./ProjectModal";
+import { options } from "@/constants";
 
-interface option {
+export interface option {
   id: string;
   title: string;
-  caption: string;
+  caption: string | null;
+  minValue: number;
   description: string;
   amountLeft: number;
 }
 
 export default function Option(props: { option: option }) {
-  const { title, caption, description, amountLeft } = props.option;
+  const { id, title, caption, description, amountLeft } = props.option;
 
   const disabled = amountLeft === 0;
 
@@ -19,9 +22,9 @@ export default function Option(props: { option: option }) {
     <Card className={twJoin("py-6", disabled && "opacity-60")}>
       <div className="mb-7 flex flex-col gap-3 md:mb-8 md:flex-row md:items-center md:justify-between">
         <h4 className="text-sm font-bold md:text-lg">{title}</h4>
-        <p className="text-moderate-cyan text-sm md:text-base">{caption}</p>
+        <p className="text-sm text-moderate-cyan md:text-base">{caption}</p>
       </div>
-      <p className="text-dark-gray mb-9 text-sm leading-6 md:mb-8 md:text-base md:leading-7">
+      <p className="mb-9 text-sm leading-6 text-dark-gray md:mb-8 md:text-base md:leading-7">
         {description}
       </p>
 
@@ -30,9 +33,16 @@ export default function Option(props: { option: option }) {
           <span className="text-[32px] font-bold">{amountLeft}</span>
           <span>left</span>
         </div>
-        <Button disabled={disabled}>
-          {disabled ? "Out of stock" : "Select Reward"}
-        </Button>
+
+        {disabled ? (
+          <Button disabled={true}>Out of stock</Button>
+        ) : (
+          <ProjectModal
+            buttonText="Select Reward"
+            options={options}
+            activeOptionId={id}
+          />
+        )}
       </div>
     </Card>
   );
