@@ -1,3 +1,8 @@
+export const bool = {
+  TRUE: "true",
+  FALSE: "false",
+};
+
 export const options = [
   {
     id: "0",

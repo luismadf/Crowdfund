@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   BookmarkButton,
   Card,
@@ -14,10 +14,20 @@ import { menu, options } from "./constants";
 function App() {
   const [pressed, setPressed] = useState(false);
 
+  useEffect(() => {
+    const test = async () => {
+      const response = await fetch("https://example.com/user");
+      const data = await response.json();
+      console.log(data);
+    };
+
+    test();
+  }, []);
+
   return (
     <>
       <header className="h-[300px] w-full bg-hero-mobile bg-cover bg-top sm:bg-hero-desktop">
-        <div className="to-transparent bg-gradient-to-b from-black/70 pt-8">
+        <div className="bg-gradient-to-b from-black/70 to-transparent pt-8">
           <nav className="inset-0 mx-6 flex items-center justify-between xl:mx-auto xl:max-w-6xl">
             <svg width="128" height="20" xmlns="http://www.w3.org/2000/svg">
               <path
