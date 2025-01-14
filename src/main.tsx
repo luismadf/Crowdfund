@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
 import { bool } from "./constants/index.ts";
+import Providers from "@/providers/index.tsx";
 
 async function enableMocking() {
   if (import.meta.env.VITE_ENABLE_MOCK_API === bool.TRUE) {
@@ -16,7 +17,9 @@ async function enableMocking() {
 enableMocking().then(() => {
   createRoot(document.getElementById("root")!).render(
     <StrictMode>
-      <App />
+      <Providers>
+        <App />
+      </Providers>
     </StrictMode>,
   );
 });
