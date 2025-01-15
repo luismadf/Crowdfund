@@ -11,6 +11,7 @@ export interface option {
   minValue: number;
   description: string;
   amountLeft: number;
+  noShowMainScreen: boolean;
 }
 
 export default function Option(props: { option: option }) {
