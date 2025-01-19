@@ -34,6 +34,7 @@ const options = [
     description:
       "You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and you’ll be added to a special Backer member list.",
     caption: "Pledge $25 or more",
+    minValue: 25,
     amountLeft: 101,
     noShowMainScreen: false,
   },
@@ -44,6 +45,7 @@ const options = [
     description:
       "You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer member list. Shipping is included.",
     caption: "Pledge $75 or more",
+    minValue: 75,
     amountLeft: 64,
     noShowMainScreen: false,
   },
@@ -54,6 +56,7 @@ const options = [
     description:
       "You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added to our Backer member list. Shipping is included.",
     caption: "Pledge $200 or more",
+    minValue: 200,
     amountLeft: 0,
     noShowMainScreen: false,
   },
@@ -77,6 +80,7 @@ export const db = factory({
     title: String,
     description: String,
     caption: nullable(String),
+    minValue: Number,
     amountLeft: Number,
     noShowMainScreen: Boolean,
   },

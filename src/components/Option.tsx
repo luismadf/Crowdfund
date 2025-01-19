@@ -2,7 +2,6 @@ import { twJoin } from "tailwind-merge";
 import Button from "./Button";
 import Card from "./Card";
 import ProjectModal from "./ProjectModal";
-import { options } from "@/constants";
 
 export interface option {
   id: string;
@@ -38,11 +37,7 @@ export default function Option(props: { option: option }) {
         {disabled ? (
           <Button disabled={true}>Out of stock</Button>
         ) : (
-          <ProjectModal
-            buttonText="Select Reward"
-            options={options}
-            activeOptionId={id}
-          />
+          <ProjectModal buttonText="Select Reward" activeOptionId={id} />
         )}
       </div>
     </Card>
