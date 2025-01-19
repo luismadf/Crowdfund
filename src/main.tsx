@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App.tsx";
 import { bool } from "./constants/index.ts";
 import Providers from "@/providers/index.tsx";
+import { BrowserRouter, Routes, Route } from "react-router";
 
 async function enableMocking() {
   if (import.meta.env.VITE_ENABLE_MOCK_API === bool.TRUE) {
@@ -18,7 +19,11 @@ enableMocking().then(() => {
   createRoot(document.getElementById("root")!).render(
     <StrictMode>
       <Providers>
-        <App />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/:projectId" element={<App />} />
+          </Routes>
+        </BrowserRouter>
       </Providers>
     </StrictMode>,
   );
