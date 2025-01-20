@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { twJoin } from "tailwind-merge";
-import { menuOptions } from "../utils";
 import Card from "./Card";
+import { menuOptions } from "../utils";
+import { twJoin } from "tailwind-merge";
+import { useState } from "react";
 
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);
@@ -27,7 +27,7 @@ export default function MobileMenu() {
 
       <div
         className={twJoin(
-          "to-transparent absolute left-0 right-0 top-0 z-40 h-[800px] bg-gradient-to-b from-black/70",
+          "absolute left-0 right-0 top-0 z-40 h-[800px] bg-gradient-to-b from-black/70 to-transparent",
           open ? "flex" : "hidden",
         )}
       ></div>

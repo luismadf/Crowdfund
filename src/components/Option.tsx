@@ -1,7 +1,7 @@
-import { twJoin } from "tailwind-merge";
 import Button from "./Button";
 import Card from "./Card";
 import ProjectModal from "./ProjectModal";
+import { twJoin } from "tailwind-merge";
 
 export interface option {
   id: string;

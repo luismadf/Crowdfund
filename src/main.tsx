@@ -1,10 +1,10 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
 import "./index.css";
+import { BrowserRouter, Route, Routes } from "react-router";
 import App from "./App.tsx";
-import { bool } from "./constants/index.ts";
 import Providers from "@/providers/index.tsx";
-import { BrowserRouter, Routes, Route } from "react-router";
+import { StrictMode } from "react";
+import { bool } from "./constants/index.ts";
+import { createRoot } from "react-dom/client";
 
 async function enableMocking() {
   if (import.meta.env.VITE_ENABLE_MOCK_API === bool.TRUE) {

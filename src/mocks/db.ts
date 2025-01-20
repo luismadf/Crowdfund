@@ -1,4 +1,4 @@
-import { factory, primaryKey, nullable } from "@mswjs/data";
+import { factory, nullable, primaryKey } from "@mswjs/data";
 import { sample } from "lodash-es";
 
 const project = {
