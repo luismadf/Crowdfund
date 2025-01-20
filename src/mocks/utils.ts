@@ -1,8 +1,11 @@
-import { HttpResponse, delay as _delay, JsonBodyType } from "msw";
+import { HttpResponse, JsonBodyType, delay as _delay } from "msw";
 import { random } from "lodash-es";
 
-export async function response(body: JsonBodyType) {
-  const delay = random(500, 1000);
-  await _delay(delay);
+export async function response(
+  body: JsonBodyType,
+  options?: { delay?: number },
+) {
+  const delayTime = options?.delay ?? random(500, 1000);
+  await _delay(delayTime);
   return HttpResponse.json(body);
 }
