@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import {
   BookmarkButton,
   Card,
@@ -9,20 +8,60 @@ import {
   ProjectModal,
   StatsDisplay,
 } from "./components";
-import { menu, options } from "./constants";
+import { useEffect, useState } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { formatToUSD } from "./lib/utils";
+import { menu } from "./constants";
+import { option as optionTypes } from "./components/Option";
+import { useParams } from "react-router";
+
+const getData = async (url: string) => {
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+};
 
 function App() {
-  const [pressed, setPressed] = useState(false);
+  const { projectId } = useParams();
+  const [isBookmarkedOptimistic, setIsBookmarkedOptimistic] = useState(false);
+
+  const project = useQuery({
+    queryKey: ["project", projectId],
+    queryFn: () => getData(`/project/${projectId}`),
+  });
+  const options = useQuery({
+    queryKey: ["options", projectId],
+    queryFn: () => getData(`/project/${projectId}/options`),
+  });
+  const mutation = useMutation({
+    mutationFn: (data: { isBookmarked: boolean }) => {
+      return fetch(`/project/${projectId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+    },
+    onMutate: ({ isBookmarked }) => {
+      // Actualiza el estado de manera optimista
+      setIsBookmarkedOptimistic(isBookmarked);
+    },
+    onError: () => {
+      // Revertir el estado si hay un error
+      setIsBookmarkedOptimistic((prev) => !prev);
+    },
+    onSettled: () => {
+      // Refrescar los datos principales después de la mutación
+      project.refetch();
+    },
+  });
 
   useEffect(() => {
-    const test = async () => {
-      const response = await fetch("https://example.com/user");
-      const data = await response.json();
-      console.log(data);
-    };
-
-    test();
-  }, []);
+    if (project.data?.isBookmarked !== undefined) {
+      setIsBookmarkedOptimistic(project.data.isBookmarked);
+    }
+  }, [project.data?.isBookmarked]);
 
   return (
     <>
@@ -52,73 +91,92 @@ function App() {
 
       <main className="mx-6 -translate-y-14 md:mx-auto md:max-w-[728px]">
         <Card className="relative mb-6">
-          <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
-            <svg width="56" height="56" xmlns="http://www.w3.org/2000/svg">
-              <g fill="none" fillRule="evenodd">
-                <circle fill="#000" cx="28" cy="28" r="28" />
-                <g fillRule="nonzero">
-                  <path
-                    d="M15.565 28.565a1.93 1.93 0 012.606-.113l.122.113 10.142 10.142a1.93 1.93 0 01-2.606 2.84l-.122-.112-10.142-10.142a1.93 1.93 0 010-2.728z"
-                    fill="#444"
-                  />
-                  <path
-                    d="M36.19 17.48c1.006-.996 2.706-.34 2.805 1.026l.005.126v10.736c0 .9-.737 1.629-1.646 1.629a1.64 1.64 0 01-1.642-1.507l-.005-.122v-6.805l-8.043 7.957c-1.006.996-2.707.34-2.806-1.026l-.004-.126v-6.805L16.81 30.52a1.66 1.66 0 01-2.224.095l-.105-.095a1.616 1.616 0 01-.096-2.2l.096-.103L25.336 17.48c1.006-.996 2.707-.34 2.806 1.026l.004.126v6.804l8.043-7.956z"
-                    fill="#FFF"
-                  />
-                </g>
-              </g>
-            </svg>
-          </div>
-          <h1 className="mx-auto mb-6 max-w-48 pt-8 text-center text-xl font-bold md:max-w-full md:pt-9 md:text-3xl">
-            Mastercraft Bamboo Monitor Riser
-          </h1>
-          <p className="mb-7 text-center text-sm text-dark-gray md:mb-9 md:text-base">
-            A beautiful & handcrafted monitor stand to reduce neck and eye
-            strain.
-          </p>
-          <div className="flex justify-between">
-            <ProjectModal buttonText="Back this project" options={options} />
-            <BookmarkButton
-              pressed={pressed}
-              onClick={() => setPressed(!pressed)}
-            />
-          </div>
+          {project.data && (
+            <>
+              <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
+                <svg width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+                  <g fill="none" fillRule="evenodd">
+                    <circle fill="#000" cx="28" cy="28" r="28" />
+                    <g fillRule="nonzero">
+                      <path
+                        d="M15.565 28.565a1.93 1.93 0 012.606-.113l.122.113 10.142 10.142a1.93 1.93 0 01-2.606 2.84l-.122-.112-10.142-10.142a1.93 1.93 0 010-2.728z"
+                        fill="#444"
+                      />
+                      <path
+                        d="M36.19 17.48c1.006-.996 2.706-.34 2.805 1.026l.005.126v10.736c0 .9-.737 1.629-1.646 1.629a1.64 1.64 0 01-1.642-1.507l-.005-.122v-6.805l-8.043 7.957c-1.006.996-2.707.34-2.806-1.026l-.004-.126v-6.805L16.81 30.52a1.66 1.66 0 01-2.224.095l-.105-.095a1.616 1.616 0 01-.096-2.2l.096-.103L25.336 17.48c1.006-.996 2.707-.34 2.806 1.026l.004.126v6.804l8.043-7.956z"
+                        fill="#FFF"
+                      />
+                    </g>
+                  </g>
+                </svg>
+              </div>
+              <h1 className="mx-auto mb-6 max-w-48 pt-8 text-center text-xl font-bold md:max-w-full md:pt-9 md:text-3xl">
+                {project.data.title}
+              </h1>
+              <p className="mb-7 text-center text-sm text-dark-gray md:mb-9 md:text-base">
+                {project.data.subtitle}
+              </p>
+              <div className="flex justify-between">
+                <ProjectModal buttonText="Back this project" />
+                <BookmarkButton
+                  pressed={isBookmarkedOptimistic}
+                  onClick={() => {
+                    mutation.mutate({
+                      isBookmarked: !isBookmarkedOptimistic,
+                    });
+                  }}
+                />
+              </div>
+            </>
+          )}
         </Card>
 
         <Card className="mb-6">
-          <div className="mb-8 flex flex-col items-center md:mb-9 md:flex-row">
-            <StatsDisplay value="$89,914" description="of $100,000 backed" />
-            <Divider />
-            <StatsDisplay value="5,007" description="total backers" />
-            <Divider />
-            <StatsDisplay value="56" description="days left" />
-          </div>
-          <ProgressBar value="70" />
+          {project.data && (
+            <>
+              <div className="mb-8 flex flex-col items-center md:mb-9 md:flex-row">
+                <StatsDisplay
+                  type="currency"
+                  value={project.data.funded}
+                  description={`of ${formatToUSD(project.data.goal)} backed`}
+                />
+                <Divider />
+                <StatsDisplay
+                  type="number"
+                  value={project.data.backersCount}
+                  description="total backers"
+                />
+                <Divider />
+                <StatsDisplay
+                  type="number"
+                  value={project.data.daysLeft}
+                  description="days left"
+                />
+              </div>
+              <ProgressBar
+                value={(project.data.funded / project.data.goal) * 100}
+              />
+            </>
+          )}
         </Card>
 
         <Card>
           <h3 className="mb-7 text-lg font-bold md:mb-10 md:text-xl">
             About this project
           </h3>
-          <p className="mb-8 text-sm leading-6 text-dark-gray md:mb-10 md:text-base md:leading-7">
-            The Mastercraft Bamboo Monitor Riser is a sturdy and stylish
-            platform that elevates your screen to a more comfortable viewing
-            height. Placing your monitor at eye level has the potential to
-            improve your posture and make you more comfortable while at work,
-            helping you stay focused on the task at hand.
-          </p>
-          <p className="mb-9 text-sm leading-6 text-dark-gray md:mb-11 md:text-base md:leading-7">
-            Featuring artisan craftsmanship, the simplicity of design creates
-            extra desk space below your computer to allow notepads, pens, and
-            USB sticks to be stored under the stand.
+
+          <p className="mb-9 whitespace-pre-line text-sm leading-6 text-dark-gray md:mb-11 md:text-base md:leading-7">
+            {project.data?.description}
           </p>
 
-          <div className="flex flex-col gap-6">
-            {options.map((option) => {
-              if (option.id === "0") return;
-              return <Option key={option.id} option={option} />;
-            })}
-          </div>
+          {options.data && (
+            <div className="flex flex-col gap-6">
+              {options.data.map((option: optionTypes) => {
+                if (option.noShowMainScreen) return;
+                return <Option key={option.id} option={option} />;
+              })}
+            </div>
+          )}
         </Card>
       </main>
     </>
