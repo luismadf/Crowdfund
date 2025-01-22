@@ -1,7 +1,8 @@
 import { twJoin, twMerge } from "tailwind-merge";
-import Card from "./Card";
-import { option } from "./Option";
 import Button from "./Button";
+import Card from "./Card";
+import { PledgeType } from "./ProjectModal";
+import { option } from "./Option";
 import { useState } from "react";
 
 export default function PledgeOption({
@@ -13,7 +14,7 @@ export default function PledgeOption({
   option: option;
   isActive: boolean;
   onClick: (id: string) => void;
-  onPledgeSuccess: (arg0: boolean) => void;
+  onPledgeSuccess: (arg0: PledgeType) => void;
 }) {
   const { id, title, caption, description, minValue, amountLeft } = option;
   const [value, setValue] = useState(minValue);
@@ -24,6 +25,10 @@ export default function PledgeOption({
   function handleOnClick() {
     if (disabled) return;
     onClick(id);
+  }
+
+  function handleOnPledgeSuccess() {
+    onPledgeSuccess({ pledgeAmount: value, optionId: id });
   }
 
   function RadioButton() {
@@ -122,7 +127,7 @@ export default function PledgeOption({
                 </div>
                 <Button
                   className="text-sm xs:px-7 xs:py-4 md:text-base"
-                  onClick={() => onPledgeSuccess(true)}
+                  onClick={() => handleOnPledgeSuccess()}
                 >
                   Continue
                 </Button>
