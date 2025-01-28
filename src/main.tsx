@@ -1,4 +1,5 @@
 import "./index.css";
+import "@radix-ui/themes/styles.css";
 import { BrowserRouter, Route, Routes } from "react-router";
 import App from "./App.tsx";
 import Providers from "@/providers/index.tsx";
