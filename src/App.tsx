@@ -10,6 +10,7 @@ import {
 } from "./components";
 import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { Skeleton } from "@radix-ui/themes";
 import { formatToUSD } from "./lib/utils";
 import { menu } from "./constants";
 import { option as optionTypes } from "./components/Option";
@@ -91,44 +92,55 @@ function App() {
 
       <main className="mx-6 -translate-y-14 md:mx-auto md:max-w-[728px]">
         <Card className="relative mb-6">
-          {project.data && (
-            <>
-              <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
-                <svg width="56" height="56" xmlns="http://www.w3.org/2000/svg">
-                  <g fill="none" fillRule="evenodd">
-                    <circle fill="#000" cx="28" cy="28" r="28" />
-                    <g fillRule="nonzero">
-                      <path
-                        d="M15.565 28.565a1.93 1.93 0 012.606-.113l.122.113 10.142 10.142a1.93 1.93 0 01-2.606 2.84l-.122-.112-10.142-10.142a1.93 1.93 0 010-2.728z"
-                        fill="#444"
-                      />
-                      <path
-                        d="M36.19 17.48c1.006-.996 2.706-.34 2.805 1.026l.005.126v10.736c0 .9-.737 1.629-1.646 1.629a1.64 1.64 0 01-1.642-1.507l-.005-.122v-6.805l-8.043 7.957c-1.006.996-2.707.34-2.806-1.026l-.004-.126v-6.805L16.81 30.52a1.66 1.66 0 01-2.224.095l-.105-.095a1.616 1.616 0 01-.096-2.2l.096-.103L25.336 17.48c1.006-.996 2.707-.34 2.806 1.026l.004.126v6.804l8.043-7.956z"
-                        fill="#FFF"
-                      />
-                    </g>
+          {!project.isLoading && (
+            <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
+              <svg width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" fillRule="evenodd">
+                  <circle fill="#000" cx="28" cy="28" r="28" />
+                  <g fillRule="nonzero">
+                    <path
+                      d="M15.565 28.565a1.93 1.93 0 012.606-.113l.122.113 10.142 10.142a1.93 1.93 0 01-2.606 2.84l-.122-.112-10.142-10.142a1.93 1.93 0 010-2.728z"
+                      fill="#444"
+                    />
+                    <path
+                      d="M36.19 17.48c1.006-.996 2.706-.34 2.805 1.026l.005.126v10.736c0 .9-.737 1.629-1.646 1.629a1.64 1.64 0 01-1.642-1.507l-.005-.122v-6.805l-8.043 7.957c-1.006.996-2.707.34-2.806-1.026l-.004-.126v-6.805L16.81 30.52a1.66 1.66 0 01-2.224.095l-.105-.095a1.616 1.616 0 01-.096-2.2l.096-.103L25.336 17.48c1.006-.996 2.707-.34 2.806 1.026l.004.126v6.804l8.043-7.956z"
+                      fill="#FFF"
+                    />
                   </g>
-                </svg>
-              </div>
-              <h1 className="mx-auto mb-6 max-w-48 pt-8 text-center text-xl font-bold md:max-w-full md:pt-9 md:text-3xl">
-                {project.data.title}
-              </h1>
-              <p className="mb-7 text-center text-sm text-dark-gray md:mb-9 md:text-base">
-                {project.data.subtitle}
-              </p>
-              <div className="flex justify-between">
-                <ProjectModal buttonText="Back this project" />
-                <BookmarkButton
-                  pressed={isBookmarkedOptimistic}
-                  onClick={() => {
-                    mutation.mutate({
-                      isBookmarked: !isBookmarkedOptimistic,
-                    });
-                  }}
-                />
-              </div>
-            </>
+                </g>
+              </svg>
+            </div>
           )}
+
+          <Skeleton loading={project.isLoading} className="mb-6 mt-8 md:mt-9">
+            <h1 className="mx-auto mb-6 max-w-48 pt-8 text-center text-xl font-bold md:max-w-full md:pt-9 md:text-3xl">
+              {project.data?.title}
+            </h1>
+          </Skeleton>
+
+          <Skeleton
+            loading={project.isLoading}
+            className="mb-7 h-8 md:mb-9 md:h-6"
+          >
+            <p className="mb-7 text-center text-sm text-dark-gray md:mb-9 md:text-base">
+              {project.data?.subtitle}
+            </p>
+          </Skeleton>
+
+          <Skeleton loading={project.isLoading}>
+            <div className="flex justify-between">
+              <ProjectModal buttonText="Back this project" />
+
+              <BookmarkButton
+                pressed={isBookmarkedOptimistic}
+                onClick={() => {
+                  mutation.mutate({
+                    isBookmarked: !isBookmarkedOptimistic,
+                  });
+                }}
+              />
+            </div>
+          </Skeleton>
         </Card>
 
         <Card className="mb-6">
@@ -165,9 +177,11 @@ function App() {
             About this project
           </h3>
 
-          <p className="mb-9 whitespace-pre-line text-sm leading-6 text-dark-gray md:mb-11 md:text-base md:leading-7">
-            {project.data?.description}
-          </p>
+          <Skeleton loading={project.isLoading} className="h-20">
+            <p className="mb-9 whitespace-pre-line text-sm leading-6 text-dark-gray md:mb-11 md:text-base md:leading-7">
+              {project.data?.description}
+            </p>
+          </Skeleton>
 
           {options.data && (
             <div className="flex flex-col gap-6">
